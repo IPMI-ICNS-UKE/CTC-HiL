@@ -1,4 +1,4 @@
-case: "00001345"  # case ID (could be cartridge number or something else)
+case: "case_ID"  # case ID (could be cartridge number or something else)
 
 general_paths:
   path_to_cartridge_folder: "absolute_path_to_the_folder_containing_the_raw_tif_images"

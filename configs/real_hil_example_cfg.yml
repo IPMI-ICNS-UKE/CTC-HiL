@@ -1,0 +1,112 @@
+general_paths:
+  state_dict_path: "absolut_path_to_the_folder_containing_the_dino_model/ctc_dino.pt"
+
+  # Example path pattern for DataFrames of train and test cases (case = patient):
+  # It's assumed that all case-specific DataFrames follow a consistent directory pattern.
+  # Labeled and unlabeled DataFrames should be in the same directory for a case.
+  # Each DataFrame for a case must include the following columns:
+  #   - "case": unique case identifier
+  #   - "label": image label
+  #   - "dapi_path": path to the DAPI channel image (cropped image (e.g. png), not raw cartridge image)
+  #   - "ck_path": path to the CK channel image (cropped image (e.g. png), not raw cartridge image)
+  #   - "cd45_path": path to the CD45 channel image (cropped image (e.g. png), not raw cartridge image)
+  # Use root_path if channel paths in the dataframes are relative; set to "" if absolute paths are used.
+  # Here are two example paths:
+  example_path_to_df_of_train_case: "absolute_path_to/{train_case_id}/dataframe/{train_case_id}_labeled_dataframe"
+  example_path_to_df_of_test_case: "absolute_path_to/{test_case_id}/dataframe/{test_case_id}_labeled_dataframe"
+
+  # Root path for channel images if their paths ("dapi_path", "ck_path", "cd45_path") in the DataFrames
+  # (meaning: example_path_to_df_of_train_case and example_path_to_df_of_test_case) are relative.
+  # If absolute paths are used for the channel columns, leave root_path as an empty string: "".
+  root_path: ""
+
+  ######################################################################################################################
+  # OPTIONAL:
+  # Absolute path to the dataframe used to train the Noisy Classifier.
+  # Should include columns like "label", "dapi_path", "ck_path", "cd45_path", and optionally "case" as a case identifier.
+  path_to_df_train_noisy_classifier: "absolute_path_to_the_dataframe"
+  ######################################################################################################################
+
+  # Absolute path for storing results. Use the same path to resume a paused relabeling process.
+  path_to_results_folder: "absolute_path_to_your_results_folder"
+
+# Provide lists of case IDs for test and training cases.
+# The IDs should match those in the example_path_to_df_of_train_case (and for example_path_to_df_of_test_case).
+test_cases: [
+  'case_1',
+  'case_2',
+  'case_3',
+  'case_4',
+  'case_5',
+  'case_6',
+  'case_7',
+  'case_8',
+  'case_9',
+  'case_10'
+]
+train_cases: [
+  'case_11',
+  'case_12',
+  'case_13',
+  'case_14',
+  'case_15',
+  'case_16',
+  'case_17',
+  'case_18',
+  'case_19',
+  'case_20'
+]
+
+device: 0
+
+noisy_classifier:
+  pos_label: 2  # example label for not noisy image; put your own label
+
+HiL_configurations:
+  n_runs: 5  # Number of hil runs (=repetitions)
+  n_loops: ["init", 1, 2, 3, 4]  # Initialization and number of relabeling and sampling loops per hil run
+  class_names:
+    CTC: "1"  # positive class/ label
+    Non-CTC: "0"
+  max_relabeling_pool_size: 1000  # Maximum images shown in the relabeling gallery.
+
+  # Set this to True if you want to create in each loop a clustering plot. Keep in mind that this could take a while
+  # depending on your computer and data you provide.
+  clustering_plot_in_each_loop: False
+  shuffle_after_one_HiL_run: False  # Set this to True if no additional cells are identified for re-labeling after the first complete hil run
+
+experiment_setting:
+  experiment_name: "random" # Options of sampling strategy: "cluster_specific" or "random".
+
+dataloader_parameters:
+  batch_size: 1024
+  num_workers: 2
+
+OPT:
+  - classifier: SVC
+    params:
+      class_weight: balanced
+      cache_size: 10000
+      kernel: rbf
+      max_iter: -1
+      probability: true
+      break_ties: true
+
+PCA_parameters:
+  n_components: 32
+
+UMAP_parameters:
+  n_components: 2
+  n_neighbors: 200
+  min_dist: 0.8
+  learning_rate: 1.0
+  metric: "euclidean"
+  random_state: 42
+
+HDBSCAN_parameters:
+  min_cluster_size: 15
+  min_samples: 90
+  cluster_selection_method: "leaf"
+  cluster_selection_epsilon: 0.25
+  metric: "euclidean"
+  prediction_data: true

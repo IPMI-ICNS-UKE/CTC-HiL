@@ -1,0 +1,21 @@
+general_paths:
+  path_to_data_folder: "absolute_path_to_the_folder_containing_the_data_downloaded_from_zenodo"
+  path_to_results_folder: "absolute_path_to_your_results_folder"
+
+OPT:
+  - classifier: SVC
+    params:
+      class_weight: balanced
+      cache_size: 10000
+      kernel: rbf
+      max_iter: -1
+      probability: true
+      break_ties: true
+
+HDBSCAN_parameters:
+  min_cluster_size: 15
+  min_samples: 90
+  cluster_selection_method: "leaf"
+  cluster_selection_epsilon: 0.25
+  metric: "euclidean"
+  prediction_data: true

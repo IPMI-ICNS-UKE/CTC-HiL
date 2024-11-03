@@ -1,0 +1,22 @@
+general_paths:
+  image_root_path_unlabeled_training: "absolute_path_to_the_dataframe_containing_the_channel_paths_of_your_unlabeled_train_data"
+
+  # Root path to channel images if paths in dataframe are not absolute
+  root_path: ""
+
+DinoGym:
+  save_path: "absolute_path_to_your_results_folder"
+
+device: 0
+
+model_parameter:
+  in_chans: 3
+  pretrained: True
+  num_classes: 0
+  checkpoints: 12
+
+wandb_parameter:
+  project: 'CTC_DINO'
+  entity: 'ipmi'
+  mode: 'online'
+  group: CTC

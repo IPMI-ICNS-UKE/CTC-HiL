@@ -1,0 +1,24 @@
+general_paths:
+  path_to_data_folder: "absolute_path_to_the_folder_containing_the_data_downloaded_from_zenodo"
+  path_to_results_folder: "absolute_path_to_your_results_folder"
+
+HiL_configurations:
+  n_runs: 5  # Number of hil repetitions
+  n_loops: ["init", 1, 2, 3, 4]  # Initialization and number of loops per hil experiment
+
+  # Set this to True if you want to create in each loop a clustering plot. Keep in mind that this could take a while
+  # depending on your computer and data you provide.
+  clustering_plot_in_each_loop: False
+
+experiment_setting:
+  experiment_name: "cluster_specific" # Options of sampling strategy: cluster_specific or random
+
+OPT:
+  - classifier: SVC
+    params:
+      class_weight: balanced
+      cache_size: 10000
+      kernel: rbf
+      max_iter: -1
+      probability: true
+      break_ties: true

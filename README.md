@@ -24,7 +24,7 @@ Here's an overview of the framework and the HiL principle:
 - 🌟 **Self-Supervised Learning:** Example Python script for training on unlabeled liquid biopsy data, based on the work of [Caron et al.](https://arxiv.org/abs/2104.14294) and the reimplementation of DINO from [sparsam](https://github.com/IPMI-ICNS-UKE/sparsam).
 - 🌟 **HiL Framework:** Full code for the HiL principle is provided.
 - 🌟 **Reproducibility:** Easily reproduce simulation experiments and the clustering plot (Figure 2B).
-- 🌟 **Model Weights and Processed Data:** Accessible via [Zenodo link].
+- 🌟 **Model Weights and Processed Data:** Accessible via [Zenodo](https://doi.org/10.5281/zenodo.14033379).
 
 ## 🔧 How to use
 
@@ -53,7 +53,7 @@ Tested with Python 3.8 and PyTorch 2.4.1. If you encounter any difficulties rela
 import hil
 ```
 
-The pretrained model is available through [Zenodo link].
+The pretrained model is available through [Zenodo](https://doi.org/10.5281/zenodo.14033379).
 
 For custom use, we provide an example Python script [real_hil_example](real_hil_example.py). You can easily adapt this to your own data. An example configuration file is located [here](configs/real_hil_example_cfg.yml).
 The blueprint (the general logic) of the HiL principle can be found [here](hil/general_hil_logic.py). 

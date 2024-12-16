@@ -1,6 +1,6 @@
 # Cluster-based human-in-the-loop strategy for improving machine learning-based circulating tumor cell detection in liquid biopsy
 
-This repository contains the official code for the following paper [ArXiv link].
+This repository contains the official code for the [following paper](https://arxiv.org/abs/2411.16332).
 
 ## 🔍 ️ Overview
 This study introduces a Human-in-the-Loop (HiL) strategy for improving ML-based classification of circulating tumor cells. 

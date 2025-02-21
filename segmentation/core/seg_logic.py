@@ -1,7 +1,7 @@
 import os
 from functools import partial
 import time
-
+from pathlib import Path
 import PIL.Image as Image
 import numpy as np
 import cv2
@@ -83,6 +83,7 @@ class SegProcessorLogic:
         cartrdige_image_path_lst = []
         for image_path in os.listdir(self.cartridge_path):
             path_name = os.path.join(self.cartridge_path, image_path)
+            path_name = Path(path_name).as_posix()  # for windows
             if path_name.lower().endswith(('.tif', '.tiff')):
                 cartrdige_image_path_lst.append(path_name)
         return natsorted(cartrdige_image_path_lst)
@@ -91,12 +92,16 @@ class SegProcessorLogic:
         """
         Splits multi-frame TIF files into single-channel images and saves them.
         """
-        self.logger.info(f"Splitting {len(self.cartridge_image_path_lst)} TIFF files")
+        if self.logger:
+            self.logger.info(f"Splitting {len(self.cartridge_image_path_lst)} TIFF files")
         with alive_bar(len(self.cartridge_image_path_lst), force_tty=True) as bar:
             for image_path in self.cartridge_image_path_lst:
                 time.sleep(.005)
                 image = Image.open(image_path)
-                image_name = "cartid" + image_path.split("cartid")[-1].split(".tif")[0] + "-000"
+                if image_path.split("/")[-1].startswith("cartid"):
+                    image_name = "cartid" + image_path.split("cartid")[-1].split(".tif")[0] + "-000"
+                else:
+                    image_name = image_path.split("/")[-1].split(".tif")[0] + "-000"
                 image_path_name = os.path.join(self.save_path, "cartridge_images",  image_name)
                 for image_frame in range(self.channel_num):
                     image.seek(image_frame)

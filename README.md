@@ -1,5 +1,7 @@
 # Cluster-based human-in-the-loop strategy for improving machine learning-based circulating tumor cell detection in liquid biopsy
 
+[![DOI](https://zenodo.org/badge/882661597.svg)](https://doi.org/10.5281/zenodo.15070942)  
+
 This repository contains the official code for the [following paper](https://arxiv.org/abs/2411.16332).
 
 ## 🔍 ️ Overview

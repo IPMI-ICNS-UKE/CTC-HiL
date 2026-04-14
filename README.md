@@ -43,7 +43,7 @@ Create a Conda environment and install the necessary dependencies:
 ```bash
  conda create --name ctc_hil python=3.8
  conda activate ctc_hil
- cd CTC-Hil
+ cd CTC-HiL
  pip install -e .
  pip install -r requirements.txt
 ```

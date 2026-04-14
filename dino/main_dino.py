@@ -26,7 +26,7 @@ if __name__ == "__main__":
     torch.cuda.manual_seed_all(hash("so results are reproducible") % 2 ** 32 - 1)
 
     # Path to the configuration file
-    cfg_path = Path("/home/hhusseini/PycharmProjects/CTC/configs/dino_cfg.yml")
+    cfg_path = Path("path_to_this_file/dino_cfg.yml")
     with open(cfg_path) as f:
         config = yaml.safe_load(f)
 
